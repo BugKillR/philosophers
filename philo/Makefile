@@ -1,0 +1,24 @@
+EXE = philo
+CFLAGS = -Wall -Wextra -Werror
+
+SRC = philo.c \
+		utils.c \
+		utils1.c \
+		utils2.c
+
+OBJS = $(SRC:.c=.o)
+
+all: $(EXE)
+
+$(EXE): $(OBJS)
+	cc $(CFLAGS) $(OBJS) -o $(EXE)
+
+clean:
+	rm -rf $(OBJS)
+
+fclean: clean
+	rm -rf $(EXE)
+
+re: fclean all
+
+.PHONY = all clean fclean re
