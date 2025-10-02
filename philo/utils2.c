@@ -14,13 +14,13 @@
 
 void	*routine(void *arg)
 {
-	t_settings	set;
+	t_info	info;
 
-	set = *(t_settings *)arg;
-	printf("Number of philo: %ld\n", set.number_of_philo);
-	printf("Time to die: %ld\n", set.time_to_die);
-	printf("Time to eat: %ld\n", set.time_to_eat);
-	printf("Time to sleep: %ld\n", set.time_to_sleep);
-	printf("Max eat count: %ld\n", set.max_eat_count);
+	info = *(t_info *)arg;
+	printf("Number of philo: %ld\n", info.set.number_of_philo);
+	printf("Time to die: %ld\n", info.set.time_to_die);
+	printf("Time to eat: %ld\n", info.set.time_to_eat);
+	printf("Time to sleep: %ld\n", info.set.time_to_sleep);
+	printf("Max eat count: %ld\n", info.set.max_eat_count);
 	return (arg);
 }

@@ -42,33 +42,64 @@ static int	settings_init(t_settings *set, int argc, char *argv[])
 
 static pthread_t	*create_philos(t_settings set)
 {
-	pthread_t	*t1;
+	pthread_t	*t;
 
-	t1 = malloc(sizeof(pthread_t) * set.number_of_philo);
-	if (!t1)
+	t = malloc(sizeof(pthread_t) * set.number_of_philo);
+	if (!t)
 		return (NULL);
-	return (t1);
+	return (t);
 }
 
-static pthread_t	*general_loop(t_settings set)
+static pthread_mutex_t	*create_fork(t_settings set)
 {
-	pthread_t	*t1;
-	int			i;
+	pthread_mutex_t	*m;
+
+	m = malloc(sizeof(pthread_mutex_t) * set.number_of_philo);
+	if (!m)
+		return (NULL);
+	return (m);
+}
+
+static t_info	*create_info(pthread_mutex_t *m, int index_of_philo, t_settings set)
+{
+	t_info	*info;
+
+	info = malloc(sizeof(t_info));
+	if (!info)
+		return (NULL);
+	(*info).all_mutexes = m;
+	(*info).index_of_philo = index_of_philo;
+	(*info).set = set;
+	return (info);
+}
+
+static void	general_loop(t_settings set)
+{
+	pthread_t		*t;
+	pthread_mutex_t	*m;
+	t_info			*info;
+	int				i;
 
 	i = 0;
-	t1 = create_philos(set);
+	t = create_philos(set);
+	m = create_fork(set);
 	while (i < set.number_of_philo)
 	{
-		pthread_create(&t1[i], NULL, &routine, (void **)&set);
+		pthread_mutex_init(&m[i], NULL);
+		info = create_info(m, i, set);
+		pthread_create(&t[i], NULL, &routine, (void **)info);
 		i++;
 	}
 	i = 0;
 	while (i < set.number_of_philo)
 	{
-		pthread_join(t1[i], NULL);
+		pthread_join(t[i], (void **)&info);
+		free(info);
+		pthread_mutex_destroy(&m[i]);
 		i++;
 	}
-	return (t1);
+	free(t);
+	free(m);
 }
 
 int	main(int argc, char *argv[])
@@ -77,6 +108,6 @@ int	main(int argc, char *argv[])
 
 	if (settings_init(&set, argc, argv))
 		return (1);
-	free(general_loop(set));
+	general_loop(set);
 	return (0);
 }

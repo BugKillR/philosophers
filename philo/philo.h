@@ -31,11 +31,12 @@ typedef struct s_settings
 	long	max_eat_count;
 }				t_settings;
 
-typedef struct s_philo
+typedef struct s_info
 {
-	pthread_mutex_t	lfork;
-	pthread_mutex_t	rfork;
-}				t_philo;
+	pthread_mutex_t	*all_mutexes;
+	t_settings		set;
+	int				index_of_philo;
+}				t_info;
 
 long	ft_atol(const char *num);
 
