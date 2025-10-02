@@ -102,12 +102,18 @@ static void	general_loop(t_settings set)
 	free(m);
 }
 
+static void	set_time(t_settings *set)
+{
+	gettimeofday(&(*set).start_time, NULL);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_settings	set;
 
 	if (settings_init(&set, argc, argv))
 		return (1);
+	set_time(&set);
 	general_loop(set);
 	return (0);
 }

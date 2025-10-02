@@ -11,7 +11,7 @@ OBJS = $(SRC:.c=.o)
 all: $(EXE)
 
 $(EXE): $(OBJS)
-	cc $(CFLAGS) $(OBJS) -o $(EXE)
+	cc -g $(CFLAGS) $(OBJS) -o $(EXE)
 
 clean:
 	rm -rf $(OBJS)

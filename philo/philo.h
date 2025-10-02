@@ -24,11 +24,12 @@
 
 typedef struct s_settings
 {
-	long	number_of_philo;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	max_eat_count;
+	long			number_of_philo;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			max_eat_count;
+	struct timeval	start_time;
 }				t_settings;
 
 typedef struct s_info
