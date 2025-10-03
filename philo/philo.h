@@ -28,7 +28,7 @@ typedef struct s_settings
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
-	long			max_eat_count;
+	long			*max_eat_count;
 	struct timeval	start_time;
 }				t_settings;
 

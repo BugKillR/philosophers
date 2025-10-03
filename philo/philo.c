@@ -29,11 +29,11 @@ static int	settings_init(t_settings *set, int argc, char *argv[])
 	if ((*set).time_to_sleep <= 0)
 		return (printf("Time to sleep must be higher than 0!\n"), 1);
 	if (argc == 5)
-		(*set).max_eat_count = -1;
+		*((*set).max_eat_count) = -1;
 	else if (argc == 6)
 	{
-		(*set).max_eat_count = ft_atol(argv[5]);
-		if ((*set).max_eat_count <= 0)
+		*((*set).max_eat_count) = ft_atol(argv[5]);
+		if (*((*set).max_eat_count) <= 0)
 			return (printf("Number of times each philo must eat can't"),
 				printf("be lower than 1!\n"), 1);
 	}
